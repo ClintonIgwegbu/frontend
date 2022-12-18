@@ -1,3 +1,11 @@
+:root {
+  --primary: #585dea;
+  --margin: 15px;
+  --background: linear-gradient(90deg, #27143c 0%, #121639 100%);
+  --darkBackground: #20222B;
+  --navbarHeight: 64px;
+}
+
 html,
 body {
   padding: 0;
@@ -23,4 +31,13 @@ a {
     color: white;
     background: black;
   }
+}
+
+::-webkit-scrollbar {
+  width: 6.5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #BBCBDD;
 }

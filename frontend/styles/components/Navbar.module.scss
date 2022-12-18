@@ -1,0 +1,173 @@
+@use './Button.module.scss';
+
+.navbar {
+    background-color:transparent;
+    height: var(--navbarHeight);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-family: 'PT Sans', sans-serif;
+    position: fixed;  /* ensures the bar sticks to top of page when we scroll*/
+    top: 0;
+    width:100%;
+    z-index: 999;
+    transition: all 0.5s ease-out;
+}
+
+.navbar:before {
+  content : "";
+  position: absolute;
+  left    : 80px;
+  bottom  : 0;
+  height  : 1px;
+  width   : calc(100% - 2 * 80px);
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.active {
+  // background-color: #000;
+  border: none;
+}
+
+.hidden {
+  top: -100px;
+  background-color: #000;
+  border: none;
+}
+
+.hidden:before {
+  border: none;
+}
+
+.navbarContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--navbarHeight);
+    max-width: 1500px;
+}
+
+.navbarLogo {
+    color: #fff;
+    justify-self: start;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    font-weight:700;
+}
+
+.logoIcon {
+    margin-right: 5px;
+    font-size: 2rem;
+}
+
+.logoText {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.navMenu {
+    display: grid;
+    grid-template-columns: repeat(5, auto);  /* i.e. auto auto auto auto i.e. 4 columns of same width */
+    grid-gap: 10px;
+    list-style: none;
+    text-align: center;
+    width: 60vw;
+    justify-content: end;
+    margin-right: 2em;
+}
+
+.navItem {
+    height: var(--navbarHeight);
+}
+
+.navLinks {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    height: 100%;
+    font-family: 'PT Sans', sans-serif;
+    font-weight: 700;
+}
+
+.navLinks:hover {
+    border-bottom: 4px solid #fff;
+    transition: all 0.2s ease-out;
+}
+
+.fa-bars {
+    color: #fff;
+}
+
+.menuIcon {
+    display: none;
+}
+
+@media screen and (max-width: 960px) {
+    .NavbarItems {
+      position: relative;
+    }
+  
+    .navMenu {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 90vh;
+      position: absolute;
+      top: var(--navbarHeight);
+      left: -100%;
+      opacity: 1;
+      transition: all 0.5s ease;
+    }
+  
+    .navMenu.active {
+      background: #242222;
+      left: 0;
+      opacity: 1;
+      transition: all 0.5s ease;
+      z-index: 1;
+    }
+  
+    .navLinks {
+      text-align: center;
+      padding: 2rem;
+      width: 100%;
+      display: table;
+    }
+  
+    .navLinks:hover {
+      background-color: #fff;
+      color: #242424;
+      border-radius: 0;
+    }
+  
+    .navbarLogo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(25%, 50%);
+    }
+  
+    .menuIcon {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(-100%, 60%);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+  
+    .fa-times {
+      color: #fff;
+      font-size: 2rem;
+    }
+
+    .logoText {
+      display: none;
+    }
+}

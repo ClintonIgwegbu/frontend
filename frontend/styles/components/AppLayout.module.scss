@@ -1,0 +1,23 @@
+.topNavigationLayout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.homePageLayout {
+    background: linear-gradient(90deg, #341C4F 0%, #171C47 100%);
+}
+
+.workspaceLayout {
+    background: #121639
+}
+
+.leftNavigationLayout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: calc(100vh - var(--navbarHeight));
+    position: absolute;
+    top: var(--navbarHeight);
+    flex: auto;
+}

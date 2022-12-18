@@ -1,0 +1,30 @@
+.scriptsPage {
+    // background: linear-gradient(90deg, #341C4F 0%, #171C47 100%);
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex: 10 1 auto;
+    padding: 10px var(--margin) var(--margin) var(--margin);
+}
+
+.controls {
+    display: flex;
+    margin-right: 15px;
+    height: fit-content;
+    flex: 0 1 auto;
+}
+
+.controls .btn {
+    margin-left: 15px;
+}
+
+.workspaceLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logoIcon {
+    margin-right: 5px;
+    font-size: 20px;
+}
