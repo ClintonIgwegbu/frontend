@@ -1,13 +1,13 @@
 import HomePageLayout from '@modules/home/components/HomePageLayout';
-import { HomePageContent } from '@modules/index';
+import { PricingPageContent } from '@modules/index';
 import React from 'react';
 
-const HomePage = () => {
+const PricingPage = () => {
   return (
     <HomePageLayout>
-      <HomePageContent />
+      <PricingPageContent />
     </HomePageLayout>
   );
 };
 
-export default HomePage;
+export default PricingPage;

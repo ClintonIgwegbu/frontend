@@ -1,4 +1,4 @@
-import { ScriptsPageContent } from '@modules/projects';
+import { ScriptsPageContent } from '@modules/index';
 import WorkspaceLayout from '@modules/projects/components/WorkspaceLayout';
 import React from 'react';
 
