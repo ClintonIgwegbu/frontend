@@ -6,7 +6,7 @@ import Highlight from '@tiptap/extension-highlight';
 import { Link as EditorLink } from '@tiptap/extension-link';
 import Underline from '@tiptap/extension-underline';
 import TextAlign from '@tiptap/extension-text-align';
-import styles from '@styles/components/ScriptContainer.module.scss';
+import styles from '@styles/components/Scripts.module.scss';
 
 const ScriptContainer: FunctionComponent = () => {
   const textEditor = useEditor({

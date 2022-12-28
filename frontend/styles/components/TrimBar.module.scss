@@ -1,0 +1,31 @@
+$endCapRadius: 4px;
+$trimBarHeight: calc(2 * $endCapRadius);
+$endCapWidth: $endCapRadius;
+
+.trimBar {
+    display: table;
+}
+
+.leftCap {
+    float: left;
+    background-color: var(--primary);
+    border-radius: $endCapRadius 0 0 $endCapRadius;
+    width: $endCapWidth;
+    height: $trimBarHeight;
+}
+
+.rightCap {
+    float: left;
+    background-color: var(--primary);
+    border-radius: 0 $endCapRadius $endCapRadius 0;
+    width: $endCapWidth;
+    height: $trimBarHeight;
+}
+
+.midSection {
+    float: left;
+    background-color: #555;
+    width: 300px;
+    height: $trimBarHeight;
+}
+

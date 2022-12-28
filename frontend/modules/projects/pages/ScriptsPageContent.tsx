@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import styles from '@styles/pages/ScriptsPage.module.scss';
 import BRollPreviewContainer from '../components/BRollPreviewContainer';
-import ScriptContainer from '../components/ScriptContainer';
+import ScriptTabs from '../components/ScriptTabs';
 
 const ScriptsPage: FunctionComponent = () => {
   return (
     <div className={`${styles.scriptsPage}`}>
-      <ScriptContainer />
+      <ScriptTabs />
       <BRollPreviewContainer />
     </div>
   );

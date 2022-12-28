@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { Editor } from '@tiptap/react';
-import styles from '@styles/components/ScriptContainer.module.scss';
+import styles from '@styles/components/Scripts.module.scss';
 
 type ButtonProps = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
