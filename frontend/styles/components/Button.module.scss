@@ -6,12 +6,20 @@
   cursor: pointer;
   font-family: 'PT Sans', sans-serif;
   font-weight: 700;
+  margin-left: 8px;
+  &:disabled {
+    opacity: 0.7;
+    cursor: default;
+  }
 }
 
 .btnPrimary {
   background-color: var(--primary);
   color: #fff;
-  border: 1px solid var(--primary);
+  &:hover {
+    opacity: 0.7;
+    transition: all 0.3s ease-out;
+  }
 }
 
 .btnOutline {
@@ -20,6 +28,11 @@
   padding: 8px 20px;
   border: 1px solid var(--primary);
   transition: all 0.3s ease-out;
+  &:hover {
+    background: #fff;
+    color: #242424;
+    transition: all 0.3s ease-out;
+  }
 }
 
 .btnTab {
@@ -29,6 +42,40 @@
   font-weight: 100;
   border-radius: 0 0 6px 6px;
   transition: all 0.3s ease-out;
+  &:hover {
+    background: #fff;
+    color: #000;
+    transition: all 0.3s ease-out; 
+  }
+}
+
+.btnNoBackground {
+  background-color: transparent;
+  color: white;
+  &:hover {
+    color: #838383;
+    transition: all 0.3s ease-out;
+  }
+}
+
+.btnCancel {
+  background-color: transparent;
+  color: white;
+  &:hover {
+    background-color: #2C2F38;
+    transition: all 0.3s ease-out;
+  }
+}
+
+.btnMinimal {
+  padding: 0 5px;
+  font-size: 15px;
+}
+
+.btnSmall {
+  padding: 8px 10px;
+  font-size: 15px;
+  border-radius: 20px;
 }
 
 .btnMedium {
@@ -39,23 +86,6 @@
 .btnLarge {
   padding: 12px 26px;
   font-size: 20px;
-}
-
-.btnPrimary:hover {
-  opacity: 0.8;
-  transition: all 0.3s ease-out;
-}
-
-.btnOutline:hover {
-  background: #fff;
-  color: #242424;
-  transition: all 0.3s ease-out;
-}
-
-.btnTab:hover {
-  background: #fff;
-  color: #000;
-  transition: all 0.3s ease-out; 
 }
 
 .btnEditor {

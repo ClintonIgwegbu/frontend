@@ -20,6 +20,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({ textEditor, className }) => 
     if (textEditor === null) {
       return;
     }
+
     const previousUrl = textEditor.getAttributes('link').href;
     const url = window.prompt('URL', previousUrl);
 
@@ -37,6 +38,61 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({ textEditor, className }) => 
 
     // update link
     textEditor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
+  }, [textEditor]);
+
+  // TODO: Implement custom mark functionality for comment
+  const setComment = useCallback(() => {
+    if (textEditor === null) {
+      return;
+    }
+
+    const commentId = window.prompt('Enter the comment ID');
+
+    // cancelled
+    if (commentId === null) {
+      return;
+    }
+
+    // empty
+    if (commentId === '') {
+      textEditor.chain().focus().extendMarkRange('comment').unlinkComment().run();
+
+      return;
+    }
+
+    // update link
+    textEditor.chain().focus().extendMarkRange('comment').linkComment({ id: commentId }).run();
+  }, [textEditor]);
+
+  // TODO: One possibility is that we can link to a next API which simply calls a function that changes the src of the bRollPreview.
+  const setVideo = useCallback(() => {
+    if (textEditor === null) {
+      return;
+    }
+
+    const previousVideoPath = textEditor.getAttributes('link').href;
+    const videoPath = window.prompt('videoPath', previousVideoPath);
+
+    // cancelled
+    if (videoPath === null) {
+      return;
+    }
+
+    // empty
+    if (videoPath === '') {
+      textEditor.chain().focus().extendMarkRange('link').unsetLink().run();
+
+      return;
+    }
+
+    // update link
+    textEditor.chain().focus().extendMarkRange('link').setLink({ href: videoPath }).run();
+  }, [textEditor]);
+
+  const saveText = useCallback(() => {
+    if (textEditor !== null) {
+      console.log(textEditor.getHTML());
+    }
   }, [textEditor]);
 
   const buttonProps: ButtonProps[] = textEditor
@@ -163,10 +219,10 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({ textEditor, className }) => 
           label: 'orange'
         },
         {
-          onClick: () => textEditor.chain().focus().toggleHighlight({ color: '#f1c232' }).run(),
-          className: `${
-            textEditor.isActive('highlight', { color: '#f1c232' }) ? 'is-active' : ''
-          } ${styles.btnEditor}`,
+          onClick: () => textEditor.chain().focus().toggleHighlight().run(),
+          // TODO: Edit the condition below - changes were made to use default yellow though the condition below probably
+          // applies to all highlights
+          className: `${textEditor.isActive('highlight') ? 'is-active' : ''} ${styles.btnEditor}`,
           iconType: 'fas fa-highlighter',
           label: 'yellow'
         },
@@ -177,6 +233,11 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({ textEditor, className }) => 
           } ${styles.btnEditor}`,
           iconType: 'fas fa-highlighter',
           label: 'green'
+        },
+        {
+          onClick: saveText,
+          className: `${styles.btnEditor}`,
+          iconType: 'ri-save-fill'
         }
         // {
         //   onClick: () => textEditor.chain().focus().toggleHighlight({ color: '#74c0fc' }).run(),
@@ -191,7 +252,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({ textEditor, className }) => 
 
   const buttons = buttonProps.map(prop => (
     <button
-      key={prop.iconType}
+      key={prop.iconType + prop.label}
       onClick={prop.onClick}
       className={prop.className}
       disabled={prop.disabled}>

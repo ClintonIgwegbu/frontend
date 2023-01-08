@@ -1,0 +1,177 @@
+.commentsContainer {
+}
+
+.generalCommentForm {
+  padding: 0 20px 10px 20px;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.commentFormInput {
+  height: 30px;
+  padding: 18px 0;
+  // margin-bottom: 8px;
+  margin-top: 8px;
+  border: none;
+  border-bottom: 1px solid grey;
+  background-color: transparent;
+  color: white;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
+}
+
+.commentFormInputBorderBottom {
+  align-self: center;
+  width: 0;
+  margin-bottom: 8px;
+  border-bottom: 1px solid white;
+}
+
+.commentFormInputBorderBottomFocus {
+  align-self: center;
+  width: 100%;
+  margin-bottom: 8px;
+  border-bottom: 1px solid white;
+  transition: all 0.2s ease-out;
+}
+
+.commentFormCheckbox {
+  // margin-top: auto;
+  // margin-bottom: auto;
+  background-color: #2C2F38;
+  color: #fff;
+  padding: 8px 10px;
+  font-size: 15px;
+  border: none;
+  border-radius: 20px;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 700;
+  &:hover {
+    opacity: 0.7;
+    transition: all 0.3s ease-out;
+  }
+  label {
+    margin-right: 5px;
+  }
+}
+
+.commentFormControls {
+  display: flex;
+  flex-direction: row;
+}
+
+.commentFormControlsHidden {
+  display: none
+}
+
+.commentFormButtons {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.commentFormButton {
+  font-size: 16px;
+  padding: 8px 16px;
+  background: rgb(59, 130, 246);
+  border-radius: 8px;
+  color: white;
+  margin-left: 10px;
+}
+
+.commentFormButton:hover:enabled {
+  cursor: pointer;
+  background: rgb(37, 99, 235);
+}
+
+.commentFormButton:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.commentFormCancelButton {
+  margin-left: 10px;
+}
+
+.comment {
+  // display: flex;
+  margin-bottom: 1px;
+  padding: 20px;
+  // background-color: #20222B;
+  background-color: black;
+  &:hover {
+    background-color: #2C2F38;
+    transition: all 0.2s ease-out;
+  }
+  font-size: 15px;
+}
+
+.commentWithoutReplyForm {
+  display: flex;
+}
+
+.commentImageContainer {
+  margin-right: 12px;
+  img {
+    border-radius: 50px;
+    width:25px;
+  }
+}
+
+.commentRightPart {
+  width: 100%;
+}
+
+.commentHead {
+  display: flex;
+  align-items: baseline;
+}
+
+.commentAuthor {
+  margin-right: 8px;
+  // font-size: 20px;
+  color: #fff;
+}
+
+.commentTimestamp {
+  color: #7D829C;
+}
+
+.commentText {
+  // font-size: 18px;
+  color: #fff;
+  margin: 8px 0;
+}
+
+.commentActions {
+  display: flex;
+  color: white;
+  margin-left: -13px;
+}
+
+.commentAction {
+  margin-right: 8px;
+}
+
+.commentAction:hover {
+  text-decoration: underline;
+}
+
+.replies {
+  // background-color: #20222B;
+  background-color: black;
+}
+
+.reply {
+  padding-left: 40px;
+  &:hover {
+    background-color: #2C2F38;
+    transition: all 0.2s ease-out;
+  }
+}

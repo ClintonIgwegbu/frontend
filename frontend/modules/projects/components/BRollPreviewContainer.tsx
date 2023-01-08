@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import TabLayout from './TabLayout';
-import styles from '@styles/components/BRollPreview.module.scss';
+import scriptsPageStyles from '@styles/pages/ScriptsPage.module.scss';
+import bRollStyles from '@styles/components/BRollPreview.module.scss';
 import TrimBar from './TrimBar';
 
 const BRollPreviewContainer: FunctionComponent = () => {
   const labels = ['B-Roll Preview'];
   const bRollPreview = (
-    <>
-      <iframe
+    <div key='b-roll'>
+      {/* <iframe
         width='100%'
         height='100%'
         name='B-roll preview'
@@ -15,15 +16,20 @@ const BRollPreviewContainer: FunctionComponent = () => {
         frameBorder='0'
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
         allowFullScreen
-        className={`${styles.bRollPreview}`}
-        src='https://www.youtube.com/embed/RxN74pcTHdE'
-      />
-      <TrimBar />
-    </>
+        className={`${bRollStyles.bRollPreview}`}
+        id='b-roll-preview'
+      /> */}
+      {/* TODO: Check if id can be used to link to video element as done here */}
+      <video width='100%' height='100%' controls id='b-roll-preview'>
+        <source src='/first_youtube_video_1.mov' />
+        Video unsupported by your browser.
+      </video>
+      {/* <TrimBar /> */}
+    </div>
   );
 
   return (
-    <TabLayout labels={labels} className={styles.bRollPreviewContainer}>
+    <TabLayout labels={labels} className={scriptsPageStyles.scriptsPageRightTop}>
       {[bRollPreview]}
     </TabLayout>
   );

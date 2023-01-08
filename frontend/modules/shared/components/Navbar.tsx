@@ -2,7 +2,7 @@ import React, { useState, FunctionComponent } from 'react';
 import styles from '@styles/components/NavBar.module.scss';
 import Link from 'next/link';
 import { ButtonStyle, ButtonSize } from '../types/buttonTypes';
-import Button from './Button';
+import ButtonLink from './ButtonLink';
 import NavbarMenuItem from '../types/NavbarMenuItem';
 
 type NavbarProps = {
@@ -52,7 +52,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({ menuItems, showLoginButtons })
         LOG IN
       </Link>
       {button && (
-        <Button
+        <ButtonLink
           label='SIGN UP'
           href='/sign-up'
           buttonStyle={ButtonStyle.Primary}

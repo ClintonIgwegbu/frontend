@@ -7,6 +7,30 @@
     padding: 10px var(--margin) var(--margin) var(--margin);
 }
 
+.scriptsPageRight {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 400px;
+}
+
+.scriptsPageRightTop {
+    // margin: 0;
+    // padding: 0;
+    // flex: 1 1 400px;
+    margin-bottom: calc(var(--margin) / 2);
+    height: 50%;
+    flex: 1 1 auto;
+}
+
+.scriptsPageRightBottom {
+    margin-top: calc(var(--margin) / 2);
+    height: 50%;
+    overflow-y: scroll;
+    flex: 1 1 auto;
+}
+
 .controls {
     display: flex;
     margin-right: 15px;

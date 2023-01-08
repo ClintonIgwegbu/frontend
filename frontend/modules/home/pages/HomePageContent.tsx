@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import styles from '@styles/pages/HomePage.module.scss';
-import Button from '@modules/shared/components/Button';
+import ButtonLink from '@modules/shared/components/ButtonLink';
 import { ButtonSize, ButtonStyle } from '@modules/shared/types/buttonTypes';
 
 const HomePage: FunctionComponent = () => {
@@ -19,7 +19,7 @@ const HomePage: FunctionComponent = () => {
             type='email'
             placeholder='Enter your email'
           />
-          <Button
+          <ButtonLink
             label='SIGN UP'
             href='/sign-up'
             buttonStyle={ButtonStyle.Primary}
