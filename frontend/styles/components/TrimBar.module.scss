@@ -1,89 +1,131 @@
-$endCapRadius: 4px;
-$trimBarHeight: calc(2 * $endCapRadius);
-$endCapWidth: $endCapRadius;
-
-.slidersControl {
+.wrapper {
     position: relative;
-    min-height: 50px;
+    padding: 0 20px;
+    margin-top: -40px;
+    // margin-bottom: -15px;
+}
 
-    input[type=range]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        pointer-events: all;
-        width: 24px;
-        height: 24px;
-        background-color: #fff;
-        border-radius: 50%;
-        box-shadow: 0 0 0 1px #C6C6C6;
-        cursor: pointer;
-      }
-      
-      input[type=range]::-moz-range-thumb {
-        -webkit-appearance: none;
-        pointer-events: all;
-        width: 24px;
-        height: 24px;
-        background-color: #fff;
-        border-radius: 50%;
-        box-shadow: 0 0 0 1px #C6C6C6;
-        cursor: pointer;  
-      }
-      
-      input[type=range]::-webkit-slider-thumb:hover {
-        background: #f7f7f7;
-      }
-      
-      input[type=range]::-webkit-slider-thumb:active {
-        box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
-        -webkit-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
-      }
+.sliderContainer {
+    --sliderHeight: 5px;
+    --sliderThumbHeight: 15px;
+    --sliderThumbWidth: 4px;
 
-    input[type="range"] {
-        -webkit-appearance: none; 
+    position: relative;
+    width: auto;
+    height: 40px;
+    // border: 1px solid white;
+    opacity: 0.8; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    &:hover {
+      opacity: 1;
+    }
+}
+
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: var(--sliderHeight);
+    outline: none;
+    background: transparent;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;  // This line is important as it ensures that both slider thumbs are clickable when tracks overlap.
+    &::-webkit-slider-runnable-track {
+        -webkit-appearance: none;
         appearance: none;
-        height: 2px;
-        width: 100%;
+        height: var(--sliderHeight);
+    }
+    &::-moz-range-track {
+        -moz-appearance: none;
+        appearance: none;
+        height: var(--sliderHeight);
+    }
+    &::-ms-track {
+        appearance: none;
+        height: var(--sliderHeight);
+    }
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        height: var(--sliderThumbHeight);
+        width: var(--sliderThumbWidth);
+        background-color: var(--primary);
+        cursor: pointer;
+        pointer-events: auto;
+        margin-top: -5px;
+    }
+    &::-moz-range-thumb {
+        -moz-appearance: none;
+        appearance: none;
+        height: var(--sliderThumbHeight);
+        width: var(--sliderThumbWidth);
+        background-color: var(--primary);
+        cursor: pointer;
+        pointer-events: auto;
+        margin-top: -9px;
+    }
+    &::-ms-thumb {
+        appearance: none;
+        height: var(--sliderThumbHeight);
+        width: var(--sliderThumbWidth);
+        background-color: var(--primary);
+        cursor: pointer;
+        pointer-events: auto;
+        margin-top: -9px;
+    }
+    &:active::-webkit-slider-thumb {
+        background-color: white;
+    }
+    &:active::-moz-range-thumb {
+        background-color: white;
+    }
+    &:active::-ms-thumb {
+        background-color: white;
+    }
+}
+
+.sliderTrack {
+    width: 100%;
+    height: var(--sliderHeight);;
+    background-color: #dedfff;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    border-radius: 20px;
+}
+
+.sliderValues {
+    opacity: 0;
+    transition: all 0.5s ease;
+    background-color: var(--primary);
+    width: 100px;
+    position: relative;
+    top: -15px;
+    margin: auto;
+    padding: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    color: #fff;
+    &:before {
+        content: "";
         position: absolute;
-        background-color: #C6C6C6;
-        pointer-events: none;
-      }
-  }
-
-  .fromSlider {
-    height: 0;
-    z-index: 1;
-  }
-
-.bar {
-    height: $trimBarHeight;
-    width: 100%;
-    border-radius: $endCapRadius;
-    background-color: var(--primary);
+        height: 0;
+        width: 0;
+        border-top: 6px solid var(--primary);
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        margin: auto;
+        bottom: -6px;
+        left: 0;
+        right: 0;
+    }
 }
-
-.trimBar {
-    display: table;
-}
-
-.leftCap {
-    float: left;
-    background-color: var(--primary);
-    border-radius: $endCapRadius 0 0 $endCapRadius;
-    width: $endCapWidth;
-    height: $trimBarHeight;
-}
-
-.rightCap {
-    float: left;
-    background-color: var(--primary);
-    border-radius: 0 $endCapRadius $endCapRadius 0;
-    width: $endCapWidth;
-    height: $trimBarHeight;
-}
-
-.midSection {
-    float: left;
-    background-color: #555;
-    width: 100%;
-    height: $trimBarHeight;
-}
-

@@ -2,14 +2,18 @@
     // margin: 0;
     // padding: 0;
     // flex: 1 1 400px;
+    position: relative;
     flex: 1 1 auto;
 }
 
 .bRollPreview {
     width: 100%;
-    border-radius: 0 0 4px 4px;
     background-color: #000;
-    color: #000;
-    // padding: 12px 12px 12px 12px;
     border-radius: 0;
+}
+
+.trimBar {
+    // position: absolute;
+    bottom: 0px;
+    width: 100%;
 }

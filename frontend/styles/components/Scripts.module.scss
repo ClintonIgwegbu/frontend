@@ -46,8 +46,57 @@
     button {
         background-color: black;
         color: white;
-        :hover {
+        display: inline-block;
+        &:hover {
             opacity: 0.5;
         }
     }
 }
+
+.tooltip {
+    visibility: hidden;
+    background-color: white;
+    color: black;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    position: absolute;
+    top: 100%;
+    left: -60%;
+    width: max-content;
+    z-index:1;
+    padding: 5px 10px;
+    margin-left: auto;
+}
+
+.buttonWrapper {
+    position: relative;
+    &:hover {
+        .tooltip {
+            visibility: visible;
+        }
+    }
+}
+
+/* Tooltip arrow */
+.tooltip:after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -4px;
+    border-width: 4px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+}
+
+.comment::selection {
+    background-color: #ff0;
+}
+
+.unselectedComment {
+    background-color: rgba(255, 255, 0, 0.7);
+}
+
+.selectedComment {
+background-color: rgba(255, 255, 0, 1);}

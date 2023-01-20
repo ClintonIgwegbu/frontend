@@ -7,24 +7,19 @@ import TrimBar from './TrimBar';
 const BRollPreviewContainer: FunctionComponent = () => {
   const labels = ['B-Roll Preview'];
   const bRollPreview = (
-    <div key='b-roll'>
-      {/* <iframe
+    <div key='b-roll' className={bRollStyles.bRollPreviewContainer}>
+      <video
         width='100%'
         height='100%'
-        name='B-roll preview'
-        title='B-roll preview'
-        frameBorder='0'
-        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-        allowFullScreen
-        className={`${bRollStyles.bRollPreview}`}
+        controls
         id='b-roll-preview'
-      /> */}
-      {/* TODO: Check if id can be used to link to video element as done here */}
-      <video width='100%' height='100%' controls id='b-roll-preview'>
+        className={bRollStyles.bRollPreview}>
         <source src='/first_youtube_video_1.mov' />
         Video unsupported by your browser.
       </video>
-      {/* <TrimBar /> */}
+      <div className={bRollStyles.trimBar}>
+        <TrimBar />
+      </div>
     </div>
   );
 

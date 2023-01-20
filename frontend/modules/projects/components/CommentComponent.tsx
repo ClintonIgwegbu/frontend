@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, SetStateAction, useRef } from 'react';
+import { Dispatch, FunctionComponent, SetStateAction, useEffect, useMemo, useRef } from 'react';
 import { ActiveComment, ActiveCommentType } from '../types/ActiveComment';
 import { Comment } from '../types/Comment';
 import CommentForm from './CommentForm';
@@ -11,7 +11,8 @@ type CommentComponentProps = {
   replies: Array<Comment>;
   userId: string;
   activeComment: ActiveComment | null;
-  hoveredCommentId?: string;
+  selectedCommentId: string | null;
+  setSelectedCommentId: (commentId: string | null) => void;
   setActiveComment: Dispatch<SetStateAction<ActiveComment | null>>;
   addComment: (text: string, parentId: string | null) => void;
   updateComment: (text: string, commentId: string) => void;
@@ -24,7 +25,8 @@ const CommentComponent: FunctionComponent<CommentComponentProps> = ({
   replies,
   userId,
   activeComment,
-  hoveredCommentId,
+  selectedCommentId,
+  setSelectedCommentId,
   setActiveComment,
   addComment,
   updateComment,
@@ -71,38 +73,67 @@ const CommentComponent: FunctionComponent<CommentComponentProps> = ({
     </>
   );
 
-  const commentActions = (
-    <div className={styles.commentActions}>
-      {
-        <Button
-          label={'Reply'}
-          onClick={() => setActiveComment({ id: comment.id, type: ActiveCommentType.Replying })}
-          buttonStyle={ButtonStyle.NoBackground}
-          buttonSize={ButtonSize.Minimal}
-        />
-      }
-      {canEdit && (
-        <Button
-          label={'Edit'}
-          onClick={() => setActiveComment({ id: comment.id, type: ActiveCommentType.Editing })}
-          buttonStyle={ButtonStyle.NoBackground}
-          buttonSize={ButtonSize.Minimal}
-        />
-      )}
-      {canDelete && (
-        <Button
-          label={'Delete'}
-          onClick={() => deleteComment(comment.id)}
-          buttonStyle={ButtonStyle.NoBackground}
-          buttonSize={ButtonSize.Minimal}
-        />
-      )}
-    </div>
+  const commentActions = useMemo(
+    () => (
+      <div className={styles.commentActions}>
+        {
+          <Button
+            label={'Reply'}
+            onClick={() => setActiveComment({ id: comment.id, type: ActiveCommentType.Replying })}
+            buttonStyle={ButtonStyle.NoBackground}
+            buttonSize={ButtonSize.Minimal}
+          />
+        }
+        {canEdit && (
+          <Button
+            label={'Edit'}
+            onClick={() => setActiveComment({ id: comment.id, type: ActiveCommentType.Editing })}
+            buttonStyle={ButtonStyle.NoBackground}
+            buttonSize={ButtonSize.Minimal}
+          />
+        )}
+        {canDelete && (
+          <Button
+            label={'Delete'}
+            onClick={() => deleteComment(comment.id)}
+            buttonStyle={ButtonStyle.NoBackground}
+            buttonSize={ButtonSize.Minimal}
+          />
+        )}
+      </div>
+    ),
+    [canEdit, canDelete, setActiveComment, comment.id, deleteComment]
   );
+
+  const getReplyClass = (replyId: string) => {
+    return replyId === selectedCommentId
+      ? `${styles.reply} ${styles.commentHover}`
+      : `${styles.reply}`;
+  };
+
+  useEffect(() => {
+    // Highlight selected comment and scroll it into view.
+    const current = commentRef.current;
+    if (current) {
+      if (selectedCommentId === comment.id) {
+        current.className = `${styles.comment} ${styles.commentHover}`;
+        current.scrollIntoView();
+      }
+    }
+    return () => {
+      if (current) {
+        current.className = styles.comment;
+      }
+    };
+  }, [comment.id, selectedCommentId]);
 
   return (
     <>
-      <div key={comment.id} className={styles.comment} ref={commentRef}>
+      <div
+        key={comment.id}
+        className={styles.comment}
+        ref={commentRef}
+        onClick={() => setSelectedCommentId(comment.id)}>
         <div className={styles.commentWithoutReplyForm}>
           <div className={styles.commentImageContainer}>
             <img src='/user-icon.png' />
@@ -132,7 +163,7 @@ const CommentComponent: FunctionComponent<CommentComponentProps> = ({
       {replies.length > 0 && (
         <div className={styles.replies}>
           {replies.map(reply => (
-            <div className={styles.reply} key={reply.id}>
+            <div className={getReplyClass(reply.id)} key={reply.id}>
               <CommentComponent
                 comment={reply}
                 activeComment={activeComment}
@@ -143,6 +174,8 @@ const CommentComponent: FunctionComponent<CommentComponentProps> = ({
                 parentId={comment.id}
                 replies={[]}
                 userId={userId}
+                selectedCommentId={selectedCommentId}
+                setSelectedCommentId={setSelectedCommentId}
               />
             </div>
           ))}

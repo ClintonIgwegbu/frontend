@@ -1,4 +1,5 @@
 .commentsContainer {
+  --hover-transition-time: 0.2s;
 }
 
 .generalCommentForm {
@@ -13,7 +14,6 @@
 .commentFormInput {
   height: 30px;
   padding: 18px 0;
-  // margin-bottom: 8px;
   margin-top: 8px;
   border: none;
   border-bottom: 1px solid grey;
@@ -100,16 +100,19 @@
 }
 
 .comment {
-  // display: flex;
   margin-bottom: 1px;
   padding: 20px;
-  // background-color: #20222B;
   background-color: black;
   &:hover {
     background-color: #2C2F38;
-    transition: all 0.2s ease-out;
+    transition: all var(--hover-transition-time) ease-out;
   }
   font-size: 15px;
+}
+
+.commentHover {
+  background-color: #2C2F38;
+  transition: all var(--hover-transition-time) ease-out;
 }
 
 .commentWithoutReplyForm {
@@ -164,7 +167,6 @@
 }
 
 .replies {
-  // background-color: #20222B;
   background-color: black;
 }
 
@@ -172,6 +174,10 @@
   padding-left: 40px;
   &:hover {
     background-color: #2C2F38;
-    transition: all 0.2s ease-out;
+    transition: all var(--hover-transition-time) ease-out;
+    .comment {
+      background-color: #2C2F38;
+      transition: all var(--hover-transition-time) ease-out;
+    }
   }
 }

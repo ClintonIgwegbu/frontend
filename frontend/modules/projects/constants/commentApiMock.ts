@@ -8,7 +8,7 @@ export const getComments = async () => {
       username: 'Jack',
       userId: '1',
       parentId: null,
-      createdAt: '2021-08-16T23:00:33.010+02:00'
+      createdAt: 1673887906000
     },
     {
       id: '2',
@@ -16,7 +16,7 @@ export const getComments = async () => {
       username: 'John',
       userId: '2',
       parentId: null,
-      createdAt: '2021-08-16T23:00:33.010+02:00'
+      createdAt: 1673887906000
     },
     {
       id: '3',
@@ -24,22 +24,30 @@ export const getComments = async () => {
       username: 'John',
       userId: '2',
       parentId: '1',
-      createdAt: '2021-08-16T23:00:33.010+02:00'
+      createdAt: 1673887906000
     },
     {
       id: '4',
-      body: 'Second comment second child',
+      body: 'First comment second child',
+      username: 'John',
+      userId: '2',
+      parentId: '1',
+      createdAt: 1673887906000
+    },
+    {
+      id: '5',
+      body: 'Second comment first child',
       username: 'John',
       userId: '2',
       parentId: '2',
-      createdAt: '2021-08-16T23:00:33.010+02:00'
+      createdAt: 1673887906000
     }
   ];
   return comments;
 };
 
 export const createComment = async (text: string, parentId: string | null = null) => {
-  const newComment: CommentDetails = {
+  const newComment: Comment = {
     id: Math.random().toString(36).substr(2, 9),
     body: text,
     parentId,

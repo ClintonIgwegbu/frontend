@@ -10,12 +10,19 @@ import styles from '@styles/components/Comments.module.scss';
 import { Comment } from '../types/Comment';
 import { ActiveComment } from '../types/ActiveComment';
 import CommentForm from './CommentForm';
+import { Editor } from '@tiptap/react';
 
 type CommentsContainerProps = {
   userId: string;
+  selectedCommentId: string | null;
+  setSelectedCommentId: (commentId: string | null) => void;
 };
 
-const CommentsContainer: FunctionComponent<CommentsContainerProps> = ({ userId }) => {
+const CommentsContainer: FunctionComponent<CommentsContainerProps> = ({
+  userId,
+  selectedCommentId,
+  setSelectedCommentId
+}) => {
   const [backendComments, setBackendComments] = useState<Array<Comment>>([]);
   const [activeComment, setActiveComment] = useState<ActiveComment | null>(null);
   const rootComments = backendComments.filter(backendComment => backendComment.parentId === null);
@@ -104,6 +111,8 @@ const CommentsContainer: FunctionComponent<CommentsContainerProps> = ({ userId }
           updateComment={updateComment}
           deleteComment={deleteComment}
           userId={userId}
+          selectedCommentId={selectedCommentId}
+          setSelectedCommentId={setSelectedCommentId}
         />
       ))}
     </div>
