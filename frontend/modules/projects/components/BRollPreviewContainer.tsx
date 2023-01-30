@@ -12,9 +12,10 @@ const BRollPreviewContainer: FunctionComponent = () => {
         width='100%'
         height='100%'
         controls
+        controlsList='nodownload'
         id='b-roll-preview'
         className={bRollStyles.bRollPreview}>
-        <source src='/first_youtube_video_1.mov' />
+        <source src='/60 Second Cut.mp4' />
         Video unsupported by your browser.
       </video>
       <div className={bRollStyles.trimBar}>
