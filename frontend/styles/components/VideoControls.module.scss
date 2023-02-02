@@ -1,35 +1,11 @@
-// html {
-//     box-sizing: border-box;
-//     font-family: "YouTube Noto",Roboto,Arial,Helvetica,sans-serif;
-//     height: 100%;
-// }
-
-// *, *::before, *::after {
-// box-sizing: inherit;
-// margin: 0;
-// padding: 0;
-// }
-
-// body {
-// height: 100%;
-// }
-
-.container {
-width: 100%;
-height: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
-}
-
 .videoContainer {
-width: 800px;
-border-radius: 4px;
-margin: 0 auto;
-position: relative;
-display: flex;
-flex-direction: column;
-justify-content: center;
+    width: 100%;
+    border-radius: 4px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 // video {
@@ -105,7 +81,6 @@ justify-content: center;
     margin-left: -20px;
     font-size: 12px;
     padding: 3px;
-    content: attr(data-title); // TODO: Purpose of data-title attribute?
     font-weight: bold;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.6);
@@ -157,7 +132,6 @@ justify-content: center;
     }
 
     button::before {
-        content: attr(data-title); // TODO: Purpose of data-title attribute?
         position: absolute;
         display: none;
         right: 0;
@@ -283,11 +257,3 @@ opacity: 0;
 .hidden {
     display: none;
 }
-
-// svg {
-// width: 28px;
-// height: 28px;
-// fill: #fff;
-// stroke: #fff;
-// cursor: pointer;
-// }
