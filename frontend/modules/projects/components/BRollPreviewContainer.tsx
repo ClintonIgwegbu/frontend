@@ -3,12 +3,14 @@ import TabLayout from './TabLayout';
 import scriptsPageStyles from '@styles/pages/ScriptsPage.module.scss';
 import bRollStyles from '@styles/components/BRollPreview.module.scss';
 import TrimBar from './TrimBar';
+import VideoControls from './VideoControls';
+import VideoContainer from './VideoContainer';
 
 const BRollPreviewContainer: FunctionComponent = () => {
   const labels = ['B-Roll Preview'];
   const bRollPreview = (
     <div key='b-roll' className={bRollStyles.bRollPreviewContainer}>
-      <video
+      {/* <video
         width='100%'
         height='100%'
         controls
@@ -20,7 +22,8 @@ const BRollPreviewContainer: FunctionComponent = () => {
       </video>
       <div className={bRollStyles.trimBar}>
         <TrimBar />
-      </div>
+      </div> */}
+      <VideoContainer />
     </div>
   );
 

@@ -42,9 +42,7 @@ const CommentForm: FunctionComponent<CommentFormProps> = ({
     if (showControlsOnFocus && controlsRef.current) {
       controlsRef.current.className = styles.commentFormControlsHidden;
     }
-    if (inputRef.current) {
-      inputRef.current.blur();
-    }
+    inputRef.current?.blur();
     if (inputBorderBottomRef.current) {
       inputBorderBottomRef.current.className = styles.commentFormInputBorderBottom;
     }
