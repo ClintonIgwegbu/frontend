@@ -80,17 +80,21 @@ const VideoContainer: FunctionComponent = () => {
         Video unsupported by your browser.
       </video>
       <VideoControls
-        onPlayButtonClicked={onPlayClicked}
-        onFullscreenButtonClicked={onFullscreenButtonClicked}
-        onSeek={onSeek}
-        onVolumeSliderInput={onVolumeSliderInput}
-        onMuteButtonClicked={onMuteButtonClicked}
-        isVideoPlaying={isVideoPlaying}
-        isVideoMuted={isVideoMuted}
-        isVideoFullscreen={isVideoFullscreen}
-        videoDurationInSeconds={video.current?.duration ?? 0}
-        videoElapsedSeconds={elapsedSeconds}
-        videoVolume={volume}
+        controlHandlers={{
+          onSeek,
+          onPlayButtonClicked: onPlayClicked,
+          onMuteButtonClicked,
+          onVolumeSliderInput,
+          onFullscreenButtonClicked
+        }}
+        videoState={{
+          isVideoPlaying,
+          isVideoMuted,
+          isVideoFullscreen,
+          videoDurationInSeconds: video.current?.duration ?? 0,
+          videoElapsedSeconds: elapsedSeconds,
+          videoVolume: volume
+        }}
       />
     </div>
   );

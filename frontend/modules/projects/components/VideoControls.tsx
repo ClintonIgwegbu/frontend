@@ -1,18 +1,12 @@
 import React, { FormEventHandler, FunctionComponent, useCallback, useRef } from 'react';
 import styles from '@styles/components/VideoControls.module.scss';
+import { VideoState } from '../types/VideoState';
+import { VideoControlHandlers } from '../types/VideoControlHandlers';
+import TrimBar from './TrimBar';
 
 type VideoControlsProps = {
-  onPlayButtonClicked: () => void;
-  onSeek: FormEventHandler<HTMLInputElement>;
-  onVolumeSliderInput: FormEventHandler<HTMLInputElement>;
-  onMuteButtonClicked: () => void;
-  onFullscreenButtonClicked: () => void;
-  isVideoPlaying: boolean;
-  isVideoMuted: boolean;
-  isVideoFullscreen: boolean;
-  videoElapsedSeconds: number;
-  videoDurationInSeconds: number;
-  videoVolume: number;
+  controlHandlers: VideoControlHandlers;
+  videoState: VideoState;
 };
 
 const formatTime = (timeInSeconds: number) => {
@@ -24,29 +18,32 @@ const formatTime = (timeInSeconds: number) => {
   };
 };
 
-const VideoControls: FunctionComponent<VideoControlsProps> = ({
-  onPlayButtonClicked,
-  onSeek,
-  onVolumeSliderInput,
-  onMuteButtonClicked,
-  onFullscreenButtonClicked,
-  isVideoPlaying,
-  isVideoMuted,
-  isVideoFullscreen,
-  videoElapsedSeconds,
-  videoDurationInSeconds,
-  videoVolume
-}) => {
+const VideoControls: FunctionComponent<VideoControlsProps> = ({ controlHandlers, videoState }) => {
   const playbackIcons = useRef<HTMLButtonElement>(null);
   const timeElapsed = useRef<HTMLTimeElement>(null);
   const duration = useRef<HTMLTimeElement>(null);
-  const progressBar = useRef<HTMLProgressElement>(null);
   const seek = useRef<HTMLInputElement>(null);
   const seekTooltip = useRef<HTMLDivElement>(null);
   const volumeButton = useRef<HTMLButtonElement>(null);
   const volumeSlider = useRef<HTMLInputElement>(null);
-  const pipButton = useRef<HTMLButtonElement>(null);
   const fullscreenButton = useRef<HTMLButtonElement>(null);
+
+  const {
+    onSeek,
+    onPlayButtonClicked,
+    onMuteButtonClicked,
+    onVolumeSliderInput,
+    onFullscreenButtonClicked
+  } = controlHandlers;
+
+  const {
+    isVideoPlaying,
+    isVideoMuted,
+    isVideoFullscreen,
+    videoElapsedSeconds,
+    videoDurationInSeconds,
+    videoVolume
+  } = videoState;
 
   const initializeVideoControls = () => {
     const time = formatTime(Math.round(videoDurationInSeconds));
@@ -65,9 +62,8 @@ const VideoControls: FunctionComponent<VideoControlsProps> = ({
     }
     if (seek.current) {
       seek.current.value = Math.floor(elapsedSeconds).toString();
-    }
-    if (progressBar.current) {
-      progressBar.current.value = Math.floor(elapsedSeconds);
+      const left = (parseFloat(seek.current.value) / videoDurationInSeconds) * 100;
+      seek.current.style.background = `linear-gradient(to right, var(--primary), var(--primary) ${left}%, #474545 ${left}%, #474545 100%`;
     }
   };
 
@@ -100,6 +96,13 @@ const VideoControls: FunctionComponent<VideoControlsProps> = ({
     }
   };
 
+  const updateVolumeSlider = () => {
+    if (volumeSlider.current) {
+      const left = parseFloat(volumeSlider.current.value) * 100;
+      volumeSlider.current.style.background = `linear-gradient(to right, #fff, #fff ${left}%, #474545 ${left}%, #474545 100%`;
+    }
+  };
+
   const updateFullscreenIcons = useCallback(() => {
     if (isVideoFullscreen) {
       fullscreenButton.current?.children[0].classList.add(styles.hidden);
@@ -114,16 +117,12 @@ const VideoControls: FunctionComponent<VideoControlsProps> = ({
   updateTimeElapsed();
   updatePlayIcons();
   updateVolumeIcon(); // TODO: Fix volume slider trouble
+  updateVolumeSlider();
   updateFullscreenIcons();
 
   const controls = (
     <div className={styles.videoControls}>
       <div className={styles.videoProgress}>
-        <progress
-          className={styles.progressBar}
-          ref={progressBar}
-          max={videoDurationInSeconds}
-          defaultValue='0'></progress>
         <input
           className={styles.seek}
           ref={seek}
@@ -176,9 +175,6 @@ const VideoControls: FunctionComponent<VideoControlsProps> = ({
         </div>
 
         <div className={styles.rightControls}>
-          <button className={styles.pipButton} ref={pipButton}>
-            <i className='ri-picture-in-picture-fill' />
-          </button>
           <button
             className={styles.fullscreenButton}
             ref={fullscreenButton}
@@ -188,6 +184,8 @@ const VideoControls: FunctionComponent<VideoControlsProps> = ({
           </button>
         </div>
       </div>
+
+      {/* <TrimBar /> */}
     </div>
   );
   return controls;
