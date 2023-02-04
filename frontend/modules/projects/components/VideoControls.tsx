@@ -1,4 +1,10 @@
-import React, { FormEventHandler, FunctionComponent, useCallback, useRef } from 'react';
+import React, {
+  FormEventHandler,
+  FunctionComponent,
+  KeyboardEventHandler,
+  useCallback,
+  useRef
+} from 'react';
 import styles from '@styles/components/VideoControls.module.scss';
 import { VideoState } from '../types/VideoState';
 import { VideoControlHandlers } from '../types/VideoControlHandlers';
@@ -113,6 +119,13 @@ const VideoControls: FunctionComponent<VideoControlsProps> = ({ controlHandlers,
     }
   }, [isVideoFullscreen]);
 
+  const onSpaceBarDown: KeyboardEventHandler = event => {
+    event.preventDefault();
+    if (event.code === 'Space') {
+      onPlayButtonClicked();
+    }
+  };
+
   initializeVideoControls();
   updateTimeElapsed();
   updatePlayIcons();
@@ -121,7 +134,11 @@ const VideoControls: FunctionComponent<VideoControlsProps> = ({ controlHandlers,
   updateFullscreenIcons();
 
   const controls = (
-    <div className={styles.videoControls}>
+    <div
+      className={styles.videoControls}
+      onKeyUp={event => {
+        event.preventDefault();
+      }}>
       <div className={styles.videoProgress}>
         <input
           className={styles.seek}
@@ -140,7 +157,7 @@ const VideoControls: FunctionComponent<VideoControlsProps> = ({ controlHandlers,
 
       <div className={styles.bottomControls}>
         <div className={styles.leftControls}>
-          <button ref={playbackIcons} onClick={onPlayButtonClicked}>
+          <button ref={playbackIcons} onClick={onPlayButtonClicked} onKeyDown={onSpaceBarDown}>
             <i className={'ri-play-fill'} />
             <i className={`ri-pause-fill ${styles.hidden}`} />
           </button>

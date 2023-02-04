@@ -1,6 +1,6 @@
 import { FormEventHandler } from 'react';
 
-type VideoControlHandlers = {
+export type VideoControlHandlers = {
   onSeek: FormEventHandler<HTMLInputElement>;
   onPlayButtonClicked: () => void;
   onMuteButtonClicked: () => void;

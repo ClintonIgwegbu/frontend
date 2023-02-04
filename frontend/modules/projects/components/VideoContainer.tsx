@@ -1,4 +1,10 @@
-import React, { FormEventHandler, FunctionComponent, useRef, useState } from 'react';
+import React, {
+  FormEventHandler,
+  FunctionComponent,
+  KeyboardEventHandler,
+  useRef,
+  useState
+} from 'react';
 import styles from '@styles/components/VideoControls.module.scss';
 import VideoControls from './VideoControls';
 
@@ -11,11 +17,20 @@ const VideoContainer: FunctionComponent = () => {
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [volume, setVolume] = useState(1);
 
+  document.onfullscreenchange = () => setVideoFullscreen(!isVideoFullscreen);
+
   const onPlayClicked = () => {
     if (video.current?.paused || video.current?.ended) {
       video.current?.play();
     } else {
       video.current?.pause();
+    }
+  };
+
+  const onSpaceBarDown: KeyboardEventHandler = event => {
+    event.preventDefault();
+    if (event.code === 'Space') {
+      onPlayClicked();
     }
   };
 
@@ -31,6 +46,7 @@ const VideoContainer: FunctionComponent = () => {
   };
 
   const onVolumeSliderInput: FormEventHandler<HTMLInputElement> = event => {
+    event.preventDefault();
     if (video.current) {
       if (video.current.muted) {
         video.current.muted = false;
@@ -49,7 +65,7 @@ const VideoContainer: FunctionComponent = () => {
 
   // TODO: Does not work on Safari
   const onFullscreenButtonClicked = () => {
-    setVideoFullscreen(!isVideoFullscreen);
+    // setVideoFullscreen(!isVideoFullscreen);
     if (document.fullscreenElement) {
       document.exitFullscreen();
     } else {
@@ -66,7 +82,11 @@ const VideoContainer: FunctionComponent = () => {
   };
 
   const videoContainer = (
-    <div className={styles.videoContainer} ref={videoContainerRef}>
+    <div
+      className={styles.videoContainer}
+      ref={videoContainerRef}
+      onKeyDown={onSpaceBarDown}
+      tabIndex={-1}>
       <video
         ref={video}
         width='100%'
