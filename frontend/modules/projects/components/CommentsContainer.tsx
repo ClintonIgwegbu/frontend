@@ -10,7 +10,6 @@ import styles from '@styles/components/Comments.module.scss';
 import { Comment } from '../types/Comment';
 import { ActiveComment } from '../types/ActiveComment';
 import CommentForm from './CommentForm';
-import { Editor } from '@tiptap/react';
 
 type CommentsContainerProps = {
   userId: string;
@@ -74,13 +73,7 @@ const CommentsContainer: FunctionComponent<CommentsContainerProps> = ({
     }
   };
 
-  // TODO: Seems like we're fetching comments on every component render. This seems expensive. How often is a component
-  // rendered though? I feel it's only re-rendered after an update to its state. Or I may be wrong? I think useEffect may be
-  // called after a component is mounted. Which might mean after any action that triggers a rerender e.g. a page refresh. If the
-  // dependency array has items then we check for an update to these items and call useEffect? Otherwise we call it after a page refresh? I
-  // used to think of this as being called on every CPU cycle, if the dependency array is empty, or something stupid like that. But I don't think
-  // that is how it is called. Probably what happens is that if the dependency array is empty, then the default behaviour of useEffect is to be called
-  // everytime we have an event that triggers rerender of the component. What type of event might this be? Well a page refresh would always trigger a rerender.
+  // TODO: Here we're fetching comments on every render. Maybe rethink this behavior and consider a push vs poll approach. See MVP apple notes.
   useEffect(() => {
     getCommentsApi().then(data => {
       setBackendComments(data);

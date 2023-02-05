@@ -1,0 +1,52 @@
+.bRollAnnotationsContainer {
+    --tile-width: 200px;
+    --hover-transition-time: 0.2s
+}
+
+.bRollAnnotation {
+    width: var(--tile-width);
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 10px;
+    border: none;
+    background-color: grey;
+    margin: 10px;
+
+    img {
+        width: 100%;
+        height: calc(var(--tile-width) * 9 / 16);
+    }
+
+    .annotationMetadata {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #2C2F38;
+        padding: 10px;
+        border: none;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+
+        .commentButton {
+            cursor: pointer;
+            border: none;
+            padding: 3px;
+            background-color: transparent;
+        }
+    }
+}
+
+.annotationHover {
+    opacity: 0.6;
+    transition: all var(--hover-transition-time) ease-out;
+}
+
+.hidden {
+    display: none;
+}

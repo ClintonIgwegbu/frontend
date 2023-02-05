@@ -18,12 +18,16 @@ type ScriptContainerProps = {
 
 type ScriptTabsProps = {
   selectedCommentId: string | null;
+  selectedBRollAnnotationId: string | null;
   setSelectedCommentId: (id: string | null) => void;
+  setSelectedBRollAnnotationId: (id: string | null) => void;
 };
 
 const ScriptTabs: FunctionComponent<ScriptTabsProps> = ({
   selectedCommentId,
-  setSelectedCommentId
+  selectedBRollAnnotationId,
+  setSelectedCommentId,
+  setSelectedBRollAnnotationId
 }) => {
   // TODO: Instead pass script props in and use these to populate the script tabs
   // or at least get scripts here by API call to backend. Include an 'X' to close tabs and a '+' to create new tabs.
@@ -31,7 +35,9 @@ const ScriptTabs: FunctionComponent<ScriptTabsProps> = ({
     <ScriptContainer
       key={1}
       selectedCommentId={selectedCommentId}
+      selectedBRollAnnotationId={selectedBRollAnnotationId}
       setSelectedCommentId={setSelectedCommentId}
+      setSelectedBRollAnnotationId={setSelectedBRollAnnotationId}
     />
   ];
   const labels = scripts.map(script => {

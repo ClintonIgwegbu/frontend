@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, SetStateAction, useEffect, useMemo, useRef } from 'react';
+import { FunctionComponent, SetStateAction, useEffect, useMemo, useRef } from 'react';
 import { ActiveComment, ActiveCommentType } from '../types/ActiveComment';
 import { Comment } from '../types/Comment';
 import CommentForm from './CommentForm';
@@ -13,7 +13,7 @@ type CommentComponentProps = {
   activeComment: ActiveComment | null;
   selectedCommentId: string | null;
   setSelectedCommentId: (commentId: string | null) => void;
-  setActiveComment: Dispatch<SetStateAction<ActiveComment | null>>;
+  setActiveComment: React.Dispatch<SetStateAction<ActiveComment | null>>;
   addComment: (text: string, parentId: string | null) => void;
   updateComment: (text: string, commentId: string) => void;
   deleteComment: (commentId: string) => void;
@@ -111,18 +111,19 @@ const CommentComponent: FunctionComponent<CommentComponentProps> = ({
       : `${styles.reply}`;
   };
 
+  // TODO: Should this really be an effect?
   useEffect(() => {
     // Highlight selected comment and scroll it into view.
     const current = commentRef.current;
     if (current) {
       if (selectedCommentId === comment.id) {
-        current.className = `${styles.comment} ${styles.commentHover}`;
+        current.classList.add(styles.commentHover);
         current.scrollIntoView();
       }
     }
     return () => {
       if (current) {
-        current.className = styles.comment;
+        current.classList.remove(styles.commentHover);
       }
     };
   }, [comment.id, selectedCommentId]);

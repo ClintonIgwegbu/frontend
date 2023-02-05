@@ -1,42 +1,53 @@
 import { Mark, getMarkRange, mergeAttributes } from '@tiptap/core';
 import { Plugin } from 'prosemirror-state';
-import scriptStyles from '@styles/components/Scripts.module.scss';
+import { AnnotationType } from '../types/AnnotationType';
 
-interface CommentOptions {
-  setSelectedCommentId?: (commentId: string | null) => void;
+interface AnnotationOptions {
+  onClick?: (annotationType: AnnotationType | null, annotationId: string | null) => void;
   HTMLAttributes: Record<string, any>;
 }
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
-    comment: {
+    annotation: {
       /**
-       * Set a comment mark
+       * Set an annotation mark
        */
-      setComment: (attributes: { commentId: string }) => ReturnType;
+      setAnnotation: (attributes: { annotationId: string }) => ReturnType;
       /**
-       * Unset a comment mark
+       * Unset an annotation mark
        */
-      unsetComment: () => ReturnType;
+      unsetAnnotation: () => ReturnType;
     };
   }
 }
 
-export const Comment = Mark.create<CommentOptions>({
-  name: 'comment',
+export const Annotation = Mark.create<AnnotationOptions>({
+  name: 'annotation',
 
   addOptions() {
     return {
-      HTMLAttributes: { class: `${scriptStyles.comment} ${scriptStyles.unselectedComment}` }
+      // HTMLAttributes: { class: `${scriptStyles.annotation}` }
+      HTMLAttributes: {}
     };
   },
 
   addAttributes() {
     return {
-      commentId: {
+      annotationId: {
         default: null,
-        parseHTML: el => (el as HTMLElement).getAttribute('comment-id'),
-        renderHTML: attrs => ({ 'comment-id': attrs.commentId })
+        parseHTML: el => (el as HTMLElement).getAttribute('annotation-id'),
+        renderHTML: attrs => ({ 'annotation-id': attrs.annotationId })
+      },
+      annotationType: {
+        default: null,
+        parseHTML: el => (el as HTMLElement).getAttribute('annotation-type'),
+        renderHTML: attrs => ({ 'annotation-type': attrs.annotationType })
+      },
+      class: {
+        default: '',
+        parseHTML: el => (el as HTMLElement).getAttribute('class'),
+        renderHTML: attrs => ({ class: attrs.class })
       }
     };
   },
@@ -44,25 +55,24 @@ export const Comment = Mark.create<CommentOptions>({
   parseHTML() {
     return [
       {
-        tag: 'mark[comment-id]',
-        getAttrs: el => !!(el as HTMLElement).getAttribute('comment-id') && null
+        tag: 'mark[annotation-id]'
       }
     ];
   },
 
-  // TODO: Make sure parseHTML and renderHTML are correct then update the setSelectedCommentId call below
+  // TODO: Make sure parseHTML and renderHTML are correct then update the onClick call below
   renderHTML({ HTMLAttributes }) {
     return ['mark', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)];
   },
 
   addCommands() {
     return {
-      setComment:
+      setAnnotation:
         attributes =>
         ({ commands }) => {
           return commands.setMark(this.name, attributes);
         },
-      unsetComment:
+      unsetAnnotation:
         () =>
         ({ commands }) => {
           return commands.unsetMark(this.name);
@@ -72,7 +82,7 @@ export const Comment = Mark.create<CommentOptions>({
 
   addProseMirrorPlugins() {
     const thisExtension = this;
-    const setSelectedCommentId = this.options.setSelectedCommentId;
+    const onClick = this.options.onClick;
 
     const plugins = [
       new Plugin({
@@ -80,18 +90,20 @@ export const Comment = Mark.create<CommentOptions>({
           handleClick(view, pos) {
             const { schema, doc } = view.state;
 
-            const range = getMarkRange(doc.resolve(pos), schema.marks.comment);
+            const range = getMarkRange(doc.resolve(pos), schema.marks.annotation);
 
             if (!range) {
-              if (setSelectedCommentId) {
-                setSelectedCommentId(null);
+              if (onClick) {
+                onClick(null, null);
               }
               return true;
             }
 
-            if (setSelectedCommentId) {
-              const commentId = thisExtension.editor.getAttributes(thisExtension.name).commentId;
-              setSelectedCommentId(commentId);
+            if (onClick) {
+              const { annotationId, annotationType } = thisExtension.editor.getAttributes(
+                thisExtension.name
+              );
+              onClick(annotationType, annotationId);
             }
 
             return true;
