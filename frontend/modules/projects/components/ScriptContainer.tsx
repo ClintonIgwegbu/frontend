@@ -4,7 +4,7 @@ import StarterKit from '@tiptap/starter-kit';
 import { Link as EditorLink } from '@tiptap/extension-link';
 import Underline from '@tiptap/extension-underline';
 import TextAlign from '@tiptap/extension-text-align';
-import { Comment, Annotation } from '../constants/tiptapExtensions';
+import { Annotation } from '../constants/tiptapExtensions';
 import Toolbar from './Toolbar';
 import styles from '@styles/components/Scripts.module.scss';
 import { AnnotationType } from '../types/AnnotationType';
@@ -60,6 +60,7 @@ const ScriptContainer: FunctionComponent<ScriptContainerProps> = ({
     const scriptComment: HTMLElement | null = document.querySelector(
       `[annotation-id="${selectedCommentId}"][annotation-type="${AnnotationType.Comment}"]`
     );
+
     if (scriptComment) {
       scriptComment.scrollIntoView({ block: 'center' });
       range.selectNodeContents(scriptComment);
