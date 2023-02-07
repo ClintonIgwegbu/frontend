@@ -1,6 +1,7 @@
 import { Mark, getMarkRange, mergeAttributes } from '@tiptap/core';
 import { Plugin } from 'prosemirror-state';
 import { AnnotationType } from '../types/AnnotationType';
+import styles from '@styles/components/Scripts.module.scss';
 
 interface AnnotationOptions {
   onClick?: (annotationType: AnnotationType | null, annotationId: string | null) => void;
@@ -13,7 +14,10 @@ declare module '@tiptap/core' {
       /**
        * Set an annotation mark
        */
-      setAnnotation: (attributes: { annotationId: string }) => ReturnType;
+      setAnnotation: (attributes: {
+        annotationId: string;
+        annotationType: AnnotationType;
+      }) => ReturnType;
       /**
        * Unset an annotation mark
        */
@@ -21,6 +25,11 @@ declare module '@tiptap/core' {
     };
   }
 }
+
+const AnnotationTypeToClass: Record<AnnotationType, string> = {
+  [AnnotationType.Comment]: styles.comment,
+  [AnnotationType.BRoll]: styles.bRollAnnotation
+};
 
 export const Annotation = Mark.create<AnnotationOptions>({
   name: 'annotation',
@@ -70,7 +79,10 @@ export const Annotation = Mark.create<AnnotationOptions>({
       setAnnotation:
         attributes =>
         ({ commands }) => {
-          return commands.setMark(this.name, attributes);
+          return commands.setMark(this.name, {
+            ...attributes,
+            class: AnnotationTypeToClass[attributes.annotationType]
+          });
         },
       unsetAnnotation:
         () =>

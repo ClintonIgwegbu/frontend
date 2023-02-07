@@ -55,8 +55,8 @@ const BRollAnnotationComponent: FunctionComponent<BRollAnnotationComponentProps>
         <div className={styles.annotationMetadata}>
           <span>{annotation.videoTitle}</span>
           <button className={styles.commentButton} ref={commentButtonRef}>
-            <i className={'ri-chat-new-line'} />
-            <i className={`ri-chat-4-line`} />
+            <i className={'ri-chat-new-fill'} />
+            <i className={`ri-chat-4-fill`} />
           </button>
         </div>
       </div>

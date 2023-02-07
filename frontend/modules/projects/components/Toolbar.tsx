@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { Editor } from '@tiptap/react';
 import styles from '@styles/components/Scripts.module.scss';
+import { AnnotationType } from '../types/AnnotationType';
 
 type ButtonProps = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -41,21 +42,28 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({ textEditor, className }) => 
     textEditor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
   }, [textEditor]);
 
-  const setComment = useCallback(() => {
-    if (textEditor === null) {
-      return;
-    }
+  const setAnnotation = useCallback(
+    (annotationType: AnnotationType) => {
+      if (textEditor === null) {
+        return;
+      }
 
-    const commentId = window.prompt('Enter the comment ID');
+      const annotationId = window.prompt('Enter the annotation ID');
 
-    // cancelled
-    if (commentId === null || commentId === '') {
-      return;
-    }
+      // cancelled
+      if (annotationId === null || annotationId === '') {
+        return;
+      }
 
-    // update link
-    textEditor.chain().focus().setComment({ commentId: commentId }).run();
-  }, [textEditor]);
+      // update link
+      textEditor
+        .chain()
+        .focus()
+        .setAnnotation({ annotationId: annotationId, annotationType: annotationType })
+        .run();
+    },
+    [textEditor]
+  );
 
   // TODO: One possibility is that we can link to a next API which simply calls a function that changes the src of the bRollPreview.
   const setVideo = useCallback(() => {
@@ -191,7 +199,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({ textEditor, className }) => 
         {
           onClick: () => textEditor.chain().focus().undo().run(),
           className: `${styles.btnEditor}`,
-          iconType: 'ri-arrow-go-back-line',
+          iconType: 'ri-arrow-go-back-fill',
           tooltip: 'Undo'
         },
         {
@@ -214,10 +222,16 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({ textEditor, className }) => 
           tooltip: 'Remove link'
         },
         {
-          onClick: setComment,
+          onClick: () => setAnnotation(AnnotationType.Comment),
           className: `${styles.btnEditor}`,
-          iconType: 'ri-chat-new-line',
+          iconType: 'ri-chat-new-fill',
           tooltip: 'Add comment'
+        },
+        {
+          onClick: () => setAnnotation(AnnotationType.BRoll),
+          className: `${styles.btnEditor}`,
+          iconType: 'ri-film-fill',
+          tooltip: 'Link b-roll'
         },
         {
           onClick: saveText,

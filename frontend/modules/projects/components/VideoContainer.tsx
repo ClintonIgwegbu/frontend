@@ -17,7 +17,8 @@ const VideoContainer: FunctionComponent = () => {
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [volume, setVolume] = useState(1);
 
-  //   document.onfullscreenchange = () => setVideoFullscreen(!isVideoFullscreen);
+  // TODO: sort out the line below
+  // document.onfullscreenchange = () => setVideoFullscreen(!isVideoFullscreen);
 
   const onPlayClicked = () => {
     if (video.current?.paused || video.current?.ended) {
