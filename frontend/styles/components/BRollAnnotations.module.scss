@@ -1,5 +1,5 @@
 .bRollAnnotationsContainer {
-    --tile-width: 200px;
+    --tile-width: 45%;
     --hover-transition-time: 0.2s
 }
 
@@ -12,9 +12,7 @@
     font-weight: 400;
     font-size: small;
     border-radius: 10px;
-    // border: none;
-    // border: 1px solid #000;
-    // background-color: #2C2F38;
+    border: 2px solid transparent;
     margin: 10px;
 
     img {
@@ -22,7 +20,6 @@
         border-top-right-radius: 10px;
         width: 100%;
         height: calc(var(--tile-width) * 9 / 16);
-        // opacity: 0.7;
     }
 
     .annotationMetadata {
@@ -40,12 +37,11 @@
         border-bottom-right-radius: 10px;
 
         .commentButton {
-            position: absolute;
-            bottom: 3px;
-            right: 3px;
+            position: relative;
+            // bottom: -10px;
+            right: -10px;
             cursor: pointer;
             border: none;
-            padding: 3px;
             background-color: transparent;
             color: #7D829C;
         }
@@ -53,10 +49,12 @@
 }
 
 .annotationHover {
-    opacity: 0.6;
+    border: 2px solid var(--primary);
     transition: all var(--hover-transition-time) ease-out;
 }
 
 .hidden {
     display: none;
 }
+
+// TODO: Make title and comment button in-line just as frame.io did in there's

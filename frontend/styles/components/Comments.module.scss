@@ -103,16 +103,12 @@
   margin-bottom: 1px;
   padding: 20px;
   background-color: black;
+  border-left: 2px solid transparent;
+  transition: all var(--hover-transition-time) ease-out;
   &:hover {
     background-color: #2F3246;
-    transition: all var(--hover-transition-time) ease-out;
   }
   font-size: 15px;
-}
-
-.commentHover {
-  background-color: #2F3246;
-  transition: all var(--hover-transition-time) ease-out;
 }
 
 .commentWithoutReplyForm {
@@ -172,12 +168,18 @@
 
 .reply {
   padding-left: 40px;
+  transition: all var(--hover-transition-time) ease-out;
+  border-left: 2px solid transparent;
   &:hover {
     background-color: #2F3246;
-    transition: all var(--hover-transition-time) ease-out;
     .comment {
       background-color: #2F3246;
-      transition: all var(--hover-transition-time) ease-out;
     }
   }
+}
+
+// Must come after .reply so that the border shows when a reply is clicked
+.commentHover {
+  border-left: 2px solid var(--primary);
+  transition: all var(--hover-transition-time) ease-out;
 }

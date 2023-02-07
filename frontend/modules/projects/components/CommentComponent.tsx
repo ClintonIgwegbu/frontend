@@ -116,7 +116,7 @@ const CommentComponent: FunctionComponent<CommentComponentProps> = ({
     // Highlight selected comment and scroll it into view.
     const current = commentRef.current;
     if (current) {
-      if (selectedCommentId === comment.id) {
+      if (selectedCommentId === comment.id && (parentId === null || parentId === undefined)) {
         current.classList.add(styles.commentHover);
         current.scrollIntoView();
       }
@@ -126,7 +126,7 @@ const CommentComponent: FunctionComponent<CommentComponentProps> = ({
         current.classList.remove(styles.commentHover);
       }
     };
-  }, [comment.id, selectedCommentId]);
+  }, [comment.id, selectedCommentId, parentId]);
 
   return (
     <>

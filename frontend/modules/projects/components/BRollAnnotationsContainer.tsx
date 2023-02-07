@@ -7,6 +7,7 @@ import {
 import styles from '@styles/components/BRollAnnotations.module.scss';
 import { BRollAnnotation } from '../types/BRollAnnotation';
 import BRollAnnotationComponent from './BRollAnnotationComponent';
+import { Grid } from '@mui/material';
 
 type BRollAnnotationsContainerProps = {
   selectedAnnotationId: string | null;
@@ -52,7 +53,7 @@ const BRollAnnotationsContainer: FunctionComponent<BRollAnnotationsContainerProp
   }, []);
 
   return (
-    <div className={styles.bRollAnnotationsContainer}>
+    <Grid container className={styles.bRollAnnotationsContainer}>
       {backendAnnotations.map(annotation => (
         <BRollAnnotationComponent
           key={annotation.id}
@@ -61,7 +62,7 @@ const BRollAnnotationsContainer: FunctionComponent<BRollAnnotationsContainerProp
           setSelectedAnnotationId={setSelectedAnnotationId}
         />
       ))}
-    </div>
+    </Grid>
   );
 };
 
