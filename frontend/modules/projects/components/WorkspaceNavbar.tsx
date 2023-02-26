@@ -1,13 +1,25 @@
 import React, { FunctionComponent } from 'react';
-import Navbar from '@modules/shared/components/Navbar';
+import styles from '@styles/components/WorkspaceNavbar.module.scss';
+import Link from 'next/link';
+import Button from '@modules/shared/components/Button';
+import { ButtonSize, ButtonStyle } from '@modules/shared/types/buttonTypes';
 
 const WorkspaceNavbar: FunctionComponent = () => {
-  const menuItems = [
-    { label: 'Home', href: '/' },
-    { label: 'Scripts', href: '/projects/1/workspace/scripts' },
-    { label: 'Editor', href: '/projects/1/workspace/editor' }
-  ];
-  return <Navbar menuItems={menuItems} showLoginButtons={false} heightInPixels={45} />;
+  return (
+    <>
+      <nav className={styles.workspaceNavbarContainer}>
+        <div className={styles.leftNavbar}>
+          <Link href='/' className={styles.navbarLogo}>
+            {/* <div className={styles.logoText}>colLab</div> */}
+            <i className='ri-live-fill' />
+          </Link>
+        </div>
+        <div className={styles.rightNavbar}>
+          <Button label='Share' buttonSize={ButtonSize.Medium} buttonStyle={ButtonStyle.Primary} />
+        </div>
+      </nav>
+    </>
+  );
 };
 
 export default WorkspaceNavbar;

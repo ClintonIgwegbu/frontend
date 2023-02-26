@@ -1,0 +1,15 @@
+.workspaceNavbarContainer {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: var(--workspaceNavbarHeight);
+    padding: var(--margin);
+    background-color: transparent;
+}
+
+.navbarLogo {
+    font-size: 32px;
+    color: var(--primary);
+    padding: 0;
+}

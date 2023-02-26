@@ -23,7 +23,7 @@
     // position: absolute;
     // top: var(--navbarHeight);
     position: absolute;
-    height: calc(100vh - 45px);
-    top: 45px;
+    height: calc(100vh - var(--workspaceNavbarHeight));
+    top: var(--workspaceNavbarHeight);
     flex: auto;
 }
