@@ -11,6 +11,7 @@ type ButtonProps = {
   buttonSize: ButtonSize;
   disabled?: boolean;
   type?: ButtonType;
+  customStyle?: React.CSSProperties;
 };
 
 const styleToCssClass: Record<ButtonStyle, string> = {
@@ -36,14 +37,16 @@ const Button: FunctionComponent<ButtonProps> = ({
   buttonStyle,
   buttonSize,
   disabled = false,
-  type = ButtonType.Button
+  type = ButtonType.Button,
+  customStyle
 }) => {
   return (
     <button
       type={type}
       className={`${styles.btn} ${styleToCssClass[buttonStyle]} ${sizeToCssClass[buttonSize]}`}
       onClick={onClick}
-      disabled={disabled}>
+      disabled={disabled}
+      style={customStyle}>
       {label}
     </button>
   );

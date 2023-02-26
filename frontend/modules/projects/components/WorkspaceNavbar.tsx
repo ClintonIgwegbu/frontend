@@ -4,17 +4,27 @@ import Link from 'next/link';
 import Button from '@modules/shared/components/Button';
 import { ButtonSize, ButtonStyle } from '@modules/shared/types/buttonTypes';
 
-const WorkspaceNavbar: FunctionComponent = () => {
+type WorkspaceNavbarProps = {
+  projectName: string;
+};
+
+const WorkspaceNavbar: FunctionComponent<WorkspaceNavbarProps> = ({ projectName }) => {
   return (
     <>
       <nav className={styles.workspaceNavbarContainer}>
         <div className={styles.leftNavbar}>
           <Link href='/' className={styles.navbarLogo}>
-            {/* <div className={styles.logoText}>colLab</div> */}
             <i className='ri-live-fill' />
           </Link>
+          <span>{projectName}</span>
         </div>
         <div className={styles.rightNavbar}>
+          <Button
+            label='Editor'
+            buttonSize={ButtonSize.Medium}
+            buttonStyle={ButtonStyle.Primary}
+            customStyle={{ backgroundColor: '#2F3245' }}
+          />
           <Button label='Share' buttonSize={ButtonSize.Medium} buttonStyle={ButtonStyle.Primary} />
         </div>
       </nav>

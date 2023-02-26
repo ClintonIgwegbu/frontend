@@ -1,6 +1,7 @@
 .workspaceNavbarContainer {
     box-sizing: border-box;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
     height: var(--workspaceNavbarHeight);
@@ -9,7 +10,31 @@
 }
 
 .navbarLogo {
+    position: relative;
+    top: 3px;
     font-size: 32px;
     color: var(--primary);
     padding: 0;
+}
+
+.leftNavbar {
+    display: flex;
+    align-items: center;
+
+    span {
+        height: fit-content;
+    }
+
+    * {
+        margin-right: 10px;
+    }
+}
+
+.rightNavbar {
+    display: flex;
+    align-items: center;
+
+    * {
+        margin-left: 10px;
+    }
 }
