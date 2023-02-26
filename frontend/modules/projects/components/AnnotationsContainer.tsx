@@ -18,7 +18,7 @@ const AnnotationsContainer: FunctionComponent<AnnotationsContainerProps> = ({
   setSelectedBRollAnnotationId,
   setSelectedCommentId
 }) => {
-  const labels = ['B-Roll Annotations', 'Comments'];
+  const labels = ['B-Roll', 'Comments'];
 
   return (
     <TabLayout labels={labels} className={styles.scriptsPageRightBottom}>

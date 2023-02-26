@@ -21,9 +21,13 @@
     padding: 12px;
     resize: none;
     background-color: #000;
+    background-color: #0F1015;
+    background-color: #20222B;
+    background-color: #2b2e3a;
     // box-shadow:inset 0px 0px 100px 0px rgba(255, 255, 255, 0.15);
     // background-image: linear-gradient(to bottom, #000, #000 35%, #111 50%, #000 65%);
-    color: #fff;
+    // color: #fff;
+    color: #F0F3F6;
     border: none;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
@@ -32,6 +36,12 @@
     outline: none;
     flex: 1 1 auto;
     justify-content: center;
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: #BBCBDD;
+        background-color: #4e4f5a;
+    }
 }
 
 .scriptToolbar {
@@ -43,6 +53,8 @@
     height: fit-content;
     padding: 0px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #0F1015;
+    background-color: #20222B;
 
     button {
         background-color: transparent;
@@ -56,8 +68,8 @@
 
 .tooltip {
     visibility: hidden;
-    background-color: white;
-    color: black;
+    background-color: #5f6378;
+    color: #fff;
     text-align: center;
     font-weight: 500;
     font-size: 14px;
@@ -88,7 +100,7 @@
     margin-left: -4px;
     border-width: 4px;
     border-style: solid;
-    border-color: transparent transparent white transparent;
+    border-color: transparent transparent #5f6378 transparent;
 }
 
 .comment::selection {

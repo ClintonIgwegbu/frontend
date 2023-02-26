@@ -1,6 +1,8 @@
 :root {
   --primary: #585dea;
+  // --primary: #3caea3;
   --margin: 15px;
+  --margin: 10px;
   --background: linear-gradient(90deg, #27143c 0%, #121639 100%);
   --darkBackground: #20222B;
   --navbarHeight: 64px;
@@ -40,6 +42,7 @@ a {
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #BBCBDD;
+  background-color: #37383F;
 }
 
 ::-webkit-scrollbar-corner {

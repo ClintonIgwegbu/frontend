@@ -12,6 +12,7 @@
     margin:0;
     border-radius: 4px 4px 0 0;
     background-color: #000;
+    background-color: #20222B;
     z-index: 1;
     box-shadow: 0 6px 3px rgba(0, 0, 0, 0.1);
     height: fit-content;
@@ -21,7 +22,9 @@
 
 .tab {
     padding: 14px 1em;
-    color: #fff;
+    // color: #fff;
+    background-color: transparent;
+    color: #F0F3F6;
     font-size: 14px;
     font-weight: 700;
     cursor: pointer;
@@ -37,9 +40,13 @@
 .tabPanel {
     width: 100%;
     border-radius: 0 0 4px 4px;
-    background-color: #000;
+    // background-color: #000;
     color: #000;
     border-radius: 0;
+    background-color: #0F1015;
+    background-color: #20222B;
+    // background-color: green;
+
 }
 
 .tabPanel > h2 {

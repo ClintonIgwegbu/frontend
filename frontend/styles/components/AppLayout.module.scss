@@ -10,14 +10,20 @@
 
 .workspaceLayout {
     background: #121639;
+    background-color: #20222B;
+    background-color: #0F1015;
 }
 
 .leftNavigationLayout {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: calc(100vh - var(--navbarHeight));
+    // height: calc(100vh - var(--navbarHeight));
+    // height: calc(100vh - var(--navbarHeight));
+    // position: absolute;
+    // top: var(--navbarHeight);
     position: absolute;
-    top: var(--navbarHeight);
+    height: calc(100vh - 45px);
+    top: 45px;
     flex: auto;
 }

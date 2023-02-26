@@ -8,9 +8,14 @@ import NavbarMenuItem from '../types/NavbarMenuItem';
 type NavbarProps = {
   menuItems: NavbarMenuItem[];
   showLoginButtons: boolean;
+  heightInPixels?: number;
 };
 
-const Navbar: FunctionComponent<NavbarProps> = ({ menuItems, showLoginButtons }) => {
+const Navbar: FunctionComponent<NavbarProps> = ({
+  menuItems,
+  showLoginButtons,
+  heightInPixels
+}) => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -49,11 +54,11 @@ const Navbar: FunctionComponent<NavbarProps> = ({ menuItems, showLoginButtons })
   const loginButtons = (
     <>
       <Link href='/log-in' className={styles.navLinks}>
-        LOG IN
+        Log In
       </Link>
       {button && (
         <ButtonLink
-          label='SIGN UP'
+          label='Sign Up'
           href='/sign-up'
           buttonStyle={ButtonStyle.Primary}
           buttonSize={ButtonSize.Medium}
@@ -63,7 +68,9 @@ const Navbar: FunctionComponent<NavbarProps> = ({ menuItems, showLoginButtons })
   );
   return (
     <>
-      <nav className={`${styles.navbar} ${styles.active}`}>
+      <nav
+        className={`${styles.navbar} ${styles.active}`}
+        style={{ height: `${heightInPixels}px` }}>
         <div className={styles.navbarContainer}>
           <Link href='/' className={styles.navbarLogo}>
             {/* <div className={styles.logoText}>colLab</div> */}

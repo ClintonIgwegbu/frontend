@@ -102,7 +102,9 @@
 .comment {
   margin-bottom: 1px;
   padding: 20px;
-  background-color: black;
+  // background-color: black;
+  background-color: #0F1015;
+  background-color: #20222B;
   border-left: 2px solid transparent;
   transition: all var(--hover-transition-time) ease-out;
   &:hover {
@@ -163,7 +165,9 @@
 }
 
 .replies {
-  background-color: black;
+  // background-color: black;
+  background-color: #0F1015;
+  background-color: #20222B;
 }
 
 .reply {

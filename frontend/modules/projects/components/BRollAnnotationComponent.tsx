@@ -1,6 +1,7 @@
 import { FunctionComponent, useEffect, useRef } from 'react';
 import styles from '@styles/components/BRollAnnotations.module.scss';
 import { BRollAnnotation } from '../types/BRollAnnotation';
+import Tooltip from './Tooltip';
 
 type BRollAnnotationComponentProps = {
   annotation: BRollAnnotation;
@@ -58,6 +59,9 @@ const BRollAnnotationComponent: FunctionComponent<BRollAnnotationComponentProps>
             <i className={'ri-chat-new-fill'} />
             <i className={`ri-chat-4-fill`} />
           </button>
+          <div className={styles.tooltip}>
+            <span>{annotation.videoTitle}</span>
+          </div>
         </div>
       </div>
     </>
