@@ -31,7 +31,9 @@ const ScriptTabs: FunctionComponent<ScriptTabsProps> = ({
 }) => {
   // TODO: Instead pass script props in and use these to populate the script tabs
   // or at least get scripts here by API call to backend. Include an 'X' to close tabs and a '+' to create new tabs.
-  const scripts = [
+  // Actually we'll only have one script per project (really no need for more than one) then we'll have the file tab here too.
+  const labels = ['Script', 'Files'];
+  const tabPanels = [
     <ScriptContainer
       key={1}
       selectedCommentId={selectedCommentId}
@@ -40,13 +42,13 @@ const ScriptTabs: FunctionComponent<ScriptTabsProps> = ({
       setSelectedBRollAnnotationId={setSelectedBRollAnnotationId}
     />
   ];
-  const labels = scripts.map(script => {
-    // return 'Script ' + script.key;
-    return 'Script';
-  });
+  // const labels = scripts.map(script => {
+  //   // return 'Script ' + script.key;
+  //   return 'Script';
+  // });
   return (
     <TabLayout labels={labels} className={styles.scriptTabs}>
-      {scripts}
+      {tabPanels}
     </TabLayout>
   );
 };
